@@ -55,7 +55,6 @@ export default function Home() {
         <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onReset={() => {
-                // Reset the state of your application if needed
             }}
         >
             <HomeContent />
