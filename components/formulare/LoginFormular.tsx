@@ -36,11 +36,11 @@ export default function LoginForm() {
             localStorage.setItem('token', token.access_token);
             localStorage.setItem('refreshToken', token.refresh_token);
             localStorage.setItem('expires_in', token.expires_in);
-            localStorage.setItem('user', username);
             localStorage.setItem(
-                "token_timestamp",
+                'token_timestamp',
                 Math.floor(Date.now() / 1000).toString(),
-            ),
+            );
+            localStorage.setItem('user', username);
             router.push('/buecher');
         } catch (err) {
             setError((err as Error).message);

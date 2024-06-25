@@ -94,7 +94,7 @@ export default function SideNav({
                             </li>
                         </ul>
                         <div className="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
-                            <a
+                            <Link
                                 href="#"
                                 className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1"
@@ -111,7 +111,7 @@ export default function SideNav({
                                 <span className="d-none d-sm-inline mx-1 text-dark">
                                     {username}
                                 </span>
-                            </a>
+                            </Link>
                             <ul
                                 className="dropdown-menu dropdown-menu-dark text-small shadow"
                                 aria-labelledby="dropdownUser1"

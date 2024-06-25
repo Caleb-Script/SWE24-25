@@ -1,7 +1,7 @@
 'use client';
 
 import { GraphQLClient } from 'graphql-request';
-import { BuchArtTyp, SchlagwortTyp } from '../../lib/typen';
+import { BuchartTyp, SchlagwortTyp } from '../../lib/typen';
 import { CREATE_BUCH } from '../mutation/create';
 import { SchlagwortEnum } from '../../lib/enum';
 import { extractErrorMessage } from '../graphqlError';
@@ -29,7 +29,7 @@ export const createActionBuch = async (
     const homepage = formData.get('homepage')?.toString().trim();
     const datum = formData.get('datum')?.toString().trim();
     const lieferbar = formData.get('lieferbar') === 'true';
-    const buchart = formData.get('buchart') as BuchArtTyp;
+    const buchart = formData.get('buchart') as BuchartTyp;
     const rating = formData.get('rating')?.toString().trim();
     const abbildungen = [
         {

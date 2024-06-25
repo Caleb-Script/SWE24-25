@@ -77,6 +77,7 @@ export async function refreshToken() {
             'token_timestamp',
             Math.floor(Date.now() / 1000).toString(),
         );
+
         return data.refresh;
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);

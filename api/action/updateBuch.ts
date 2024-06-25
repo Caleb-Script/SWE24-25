@@ -1,4 +1,4 @@
-import { SchlagwortTyp, BuchArtTyp } from '../../lib/typen';
+import { SchlagwortTyp, BuchartTyp } from '../../lib/typen';
 import { extractErrorMessage } from '../graphqlError';
 import { UPDATE_BUCH } from '../mutation/update';
 import { GraphQLClient } from 'graphql-request';
@@ -22,7 +22,7 @@ export async function updateActionBuch(
     const rabatt = formData.get('rabatt')?.toString().trim();
     const homepage = formData.get('homepage')?.toString().trim();
     const lieferbar = formData.get('lieferbar') === 'false';
-    const buchart = formData.get('buchart') as BuchArtTyp;
+    const buchart = formData.get('buchart') as BuchartTyp;
     const rating = formData.get('rating')?.toString().trim();
 
     try {
