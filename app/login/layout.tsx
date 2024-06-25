@@ -1,5 +1,5 @@
 import React from 'react';
-import SideNav from '../../components/Sidenav';
+import SideNav from '../../components/SideNav';
 import BootstrapClient from '@/components/BootstrapClient';
 import RequireAuth from '../../components/RequireAut';
 
@@ -9,9 +9,7 @@ export const metadata = {
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return (
-        <>{children}</>
-    );
+    return <>{children}</>;
 };
 
 export default Layout;

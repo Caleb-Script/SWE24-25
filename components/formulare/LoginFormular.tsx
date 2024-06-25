@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { LoginDaten } from "../../lib/interfaces";
-import { LoadingComponent } from "../LoadingComponent";
-import { ErrorBannerComponent } from "../ErrorBannerComponent";
-import { useRouter } from "next/navigation";
-import { getAuth } from "../../api/auth";
+import { useEffect, useState } from 'react';
+import { LoginDaten } from '../../lib/interfaces';
+import { LoadingComponent } from '../LoadingComponent';
+import { ErrorBannerComponent } from '../ErrorBannerComponent';
+import { useRouter } from 'next/navigation';
+import { getAuth } from '../../api/auth';
 
 export default function LoginForm() {
     const [loginDaten, setLoginDaten] = useState<LoginDaten>({
-        username: "",
-        password: "",
+        username: '',
+        password: '',
     });
 
     const [isInputValid, setIsInputValid] = useState<boolean>(false);
@@ -21,7 +21,7 @@ export default function LoginForm() {
     // Validate input whenever loginDaten changes
     useEffect(() => {
         setIsInputValid(
-            loginDaten.username !== "" && loginDaten.password !== ""
+            loginDaten.username !== '' && loginDaten.password !== '',
         );
     }, [loginDaten]);
 
@@ -33,10 +33,11 @@ export default function LoginForm() {
         try {
             const { username, password } = loginDaten;
             const token = await getAuth(username, password);
-            localStorage.setItem("token", token.access_token);
-            localStorage.setItem("refreshToken", token.refresh_token);
-            localStorage.setItem("user", username);
-            router.push("/buecher");
+            localStorage.setItem('token', token.access_token);
+            localStorage.setItem('refreshToken', token.refresh_token);
+            localStorage.setItem('expires_in', token.expires_in);
+            localStorage.setItem('user', username);
+            router.push('/buecher');
         } catch (err) {
             setError((err as Error).message);
         } finally {
@@ -84,7 +85,7 @@ export default function LoginForm() {
             </div>
             {isLoading && (
                 <LoadingComponent
-                    message={"Sie werden angemeldet. Haben Sie Geduld."}
+                    message={'Sie werden angemeldet. Haben Sie Geduld.'}
                 />
             )}
             {error && <ErrorBannerComponent message={error} />}
