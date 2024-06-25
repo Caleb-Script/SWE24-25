@@ -73,6 +73,10 @@ export async function refreshToken() {
         localStorage.setItem('token', data.refresh.access_token);
         localStorage.setItem('refreshToken', data.refresh.refresh_token);
         localStorage.setItem('expires_in', data.refresh.expires_in);
+        localStorage.setItem(
+            'token_timestamp',
+            Math.floor(Date.now() / 1000).toString(),
+        );
         return data.refresh;
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);

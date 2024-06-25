@@ -25,11 +25,21 @@ export default function SideNav({
     };
 
     useEffect(() => {
-        const tokenExpiresIn = parseInt(
+        const tokenExpiration = parseInt(
             localStorage.getItem('expires_in') || '0',
             10,
         );
-        setExpiresIn(tokenExpiresIn);
+        const tokenTimestamp = parseInt(
+            localStorage.getItem('token_timestamp') || '0',
+            10,
+        );
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        if (tokenExpiration && tokenTimestamp) {
+            const timeElapsed = currentTime - tokenTimestamp;
+            const remainingTime = tokenExpiration - timeElapsed;
+            setExpiresIn(remainingTime > 0 ? remainingTime : 0);
+        }
 
         const interval = setInterval(() => {
             setExpiresIn((prevExpiresIn) =>
