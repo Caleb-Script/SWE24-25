@@ -83,13 +83,13 @@ export default function CreateBuchFormular() {
     return (
         <Form
             id="buchForm"
-            className="pt-4 px-2"
+            className="pt-4 px-2 text-dark"
             noValidate
             onSubmit={handleSetValid}
         >
             <div className="rounded bg-body-tertiary px-4 py-1 pt-4">
                 <fieldset>
-                    <legend className="text-danger">Buch Anlegen</legend>
+                    <legend className="text-dark">Buch Anlegen</legend>
 
                     <div className="row">
                         <InputField
@@ -128,7 +128,7 @@ export default function CreateBuchFormular() {
                             name="preis"
                             label="Preis"
                             type="number"
-                            step={0.01}
+                            step={0.1}
                             min={0}
                             required
                             handleInputBlur={handleInputBlur}

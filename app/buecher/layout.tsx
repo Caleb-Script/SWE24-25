@@ -2,7 +2,9 @@ import React from 'react';
 
 import BootstrapClient from '@/components/BootstrapClient';
 import RequireAuth from '../../components/RequireAut';
-import SideNav from '../../components/SideNav';
+import SideNav from '../../components/SideNavigation';
+
+
 
 export const metadata = {
     title: 'Bücherverwaltung',

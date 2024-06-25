@@ -9,7 +9,7 @@ export const LoadingComponent: React.FC<Props> = ({ message }) => {
 
   return (
     <div className="d-flex justify-content-center">
-      <div role="status" className="spinner-border">
+      <div role="status" className=" text-dark spinner-border">
         <span className="sr-only">{loadingText}</span>
       </div>
     </div>

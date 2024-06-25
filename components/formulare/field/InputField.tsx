@@ -1,5 +1,5 @@
-import React from "react";
-import { InputFieldProps } from "../../../lib/interfaces.js";
+import React from 'react';
+import { InputFieldProps } from '../../../lib/interfaces.js';
 
 export function InputField({
     name,
@@ -15,11 +15,15 @@ export function InputField({
     defaultValue,
     handleInputBlur,
 }: InputFieldProps) {
+    // Klasse für die input-Feld-Styling
+    const inputClass =
+        type === 'number' ? 'form-control number-input' : 'form-control';
+
     return (
         <div className="col form-floating mb-3">
             <input
                 type={type}
-                className="form-control"
+                className={inputClass}
                 placeholder={label}
                 aria-label={`${label} Input-Feld`}
                 name={name}

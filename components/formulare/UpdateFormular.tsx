@@ -1,29 +1,31 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Button } from "../Button";
-import { BuchFormular } from "@/lib/formulare";
-import { BuchArtEnum, SchlagwortEnum } from "../../lib/enum";
-import EnumButtons from "@/components/ButtonGenerator/enumButtonGenerator";
-import { Form } from "react-bootstrap";
-import { updateBuch } from "../../api/actions";
-import { useRouter } from "next/navigation.js";
-import { ErrorBannerComponent } from "../ErrorBannerComponent";
-import { InputField } from "./field/InputField";
-import { SelectField } from "./field/SelectField";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Button } from '../Button';
+import { BuchFormular } from '@/lib/formulare';
+import { BuchArtEnum, SchlagwortEnum } from '../../lib/enum';
+import EnumButtons from '@/components/ButtonGenerator/enumButtonGenerator';
+import { Form } from 'react-bootstrap';
+import { updateBuch } from '../../api/actions';
+import { useRouter } from 'next/navigation.js';
+import { ErrorBannerComponent } from '../ErrorBannerComponent';
+import { InputField } from './field/InputField';
+import { SelectField } from './field/SelectField';
+import { RatingComponent } from '../RatingComponent';
 
 export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
-    const [state, setState] = useState({ message: "", errors: {} });
-    const token = localStorage.getItem("token");
+    const [state, setState] = useState({ message: '', errors: {} });
+    const token = localStorage.getItem('token');
     const router = useRouter();
-    const currentDate = new Date().toISOString().split("T")[0];
+    const currentDate = new Date().toISOString().split('T')[0];
     const [isValid, setValid] = useState(false);
-    const initialState = { errors: {}, message: "" };
+    const initialState = { errors: {}, message: '' };
     const [response, setResponse] = useState<string>();
     const [error, setError] = useState<string | undefined>(undefined);
+    const [rating, setRating] = useState<number>(buch.rating);
 
-    const rabattNumber = parseFloat(buch.rabatt.replace("%", ""));
+    const rabattNumber = parseFloat(buch.rabatt.replace('%', ''));
 
     const handleSetValid = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -41,7 +43,7 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
                     buch.id,
                     buch.version,
                     token,
-                    formData
+                    formData,
                 );
                 if (result.message) {
                     setResponse(result.message);
@@ -57,7 +59,7 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
     };
 
     useEffect(() => {
-        const form = document.getElementById("buchForm") as HTMLFormElement;
+        const form = document.getElementById('buchForm') as HTMLFormElement;
         const handleFormChange = () => {
             if (form && form.checkValidity()) {
                 setValid(true);
@@ -66,23 +68,23 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
             }
         };
 
-        form.addEventListener("change", handleFormChange);
+        form.addEventListener('change', handleFormChange);
 
         return () => {
-            form.removeEventListener("change", handleFormChange);
+            form.removeEventListener('change', handleFormChange);
         };
     }, []);
 
     const handleInputBlur = (
-        event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+        event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>,
     ) => {
         const input = event.currentTarget;
         if (!input.checkValidity()) {
-            input.classList.add("is-invalid");
-            input.classList.remove("is-valid");
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
         } else {
-            input.classList.remove("is-invalid");
-            input.classList.add("is-valid");
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
         }
     };
 
@@ -149,10 +151,56 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
                         handleInputBlur={handleInputBlur}
                     />
 
+                    <fieldset className="d-flex gap-5">
+                        {/* Select buttons */}
+                        <SelectField
+                            name="buchart"
+                            label="Buchart"
+                            options={[
+                                { value: BuchArtEnum.KINDLE, label: 'Kindle' },
+                                {
+                                    value: BuchArtEnum.DRUCKAUSGABE,
+                                    label: 'Druckausgabe',
+                                },
+                            ]}
+                            required={true}
+                            defaultValue={buch.art}
+                            handleInputBlur={handleInputBlur}
+                        />
+
+                        {/* Hat Newsletter */}
+                        <div>
+                            <input
+                                type="checkbox"
+                                className="btn-check"
+                                id="lieferbar"
+                                name="lieferbar"
+                                value={buch.lieferbar as unknown as string}
+                                autoComplete="off"
+                                defaultChecked={buch.lieferbar}
+                            />
+                            <label
+                                className="btn btn-outline-danger"
+                                htmlFor="lieferbar"
+                            >
+                                Lieferbar?
+                            </label>
+                        </div>
+
+                        {/* Schlagwörter */}
+                        <fieldset className="pb-2 d-flex justify-content-center">
+                            <legend className="d-flex justify-content-center">
+                                Schlagwörter
+                            </legend>
+                            <EnumButtons
+                                enumTyp={SchlagwortEnum}
+                                name={'schlagwoerter'}
+                                selectedValues={buch.schlagwoerter}
+                            />
+                        </fieldset>
+                    </fieldset>
+
                     {/* Rating */}
-                    <label htmlFor="rating" className="form-label">
-                        Rating
-                    </label>
                     <input
                         type="range"
                         className="form-range"
@@ -160,51 +208,20 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
                         max="5"
                         id="rating"
                         name="rating"
-                        defaultValue={buch.rating}
                         required
-                        onBlur={handleInputBlur}
+                        value={rating}
+                        onInput={(e) =>
+                            setRating(Number(e.currentTarget.value))
+                        }
                     />
-
-                    {/* Select buttons */}
-                    <SelectField
-                        name="buchart"
-                        label="Buchart"
-                        options={[
-                            { value: BuchArtEnum.KINDLE, label: "Kindle" },
-                            {
-                                value: BuchArtEnum.DRUCKAUSGABE,
-                                label: "Druckausgabe",
-                            },
-                        ]}
-                        required={true}
-                        defaultValue={buch.art}
-                        handleInputBlur={handleInputBlur}
-                    />
-
-                    {/* Schlagwörter */}
-                    <EnumButtons
-                        enumTyp={SchlagwortEnum}
-                        name={"schlagwoerter"}
-                        selectedValues={buch.schlagwoerter}
-                    />
-
-                    {/* Hat Newsletter */}
-                    <div>
-                        <input
-                            type="checkbox"
-                            className="btn-check"
-                            id="lieferbar"
-                            name="lieferbar"
-                            value={buch.lieferbar as unknown as string}
-                            autoComplete="off"
-                            defaultChecked={buch.lieferbar}
-                        />
-                        <label
-                            className="btn btn-outline-danger"
-                            htmlFor="lieferbar"
+                    <div className="mt-2">
+                        <output
+                            className="p-1 align-text-center  d-flex justify-content-center "
+                            htmlFor="rating"
+                            id="ratingOutput"
                         >
-                            Lieferbar?
-                        </label>
+                            <RatingComponent stars={rating} maxValue={5} />
+                        </output>
                     </div>
                 </fieldset>
 

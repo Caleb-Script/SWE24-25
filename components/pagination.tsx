@@ -73,12 +73,13 @@ function SeitenNummer({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const className = clsx(
-    "d-flex align-items-center justify-content-center border",
-    {
-      "rounded-start": position === "first" || position === "single",
-      "rounded-end": position === "last" || position === "single",
-      "bg-danger text-white border-danger": isActive,
-    }
+      'd-flex align-items-center justify-content-center border',
+      {
+          'rounded-start': position === 'first' || position === 'single',
+          'rounded-end': position === 'last' || position === 'single',
+          'bg-danger text-white border-danger': isActive,
+          'text-dark': !isActive,
+      },
   );
 
   return isActive || position === "middle" ? (
@@ -123,11 +124,11 @@ function SeitenPfeile({
   );
 
   const icon =
-    direction === "left" ? (
-      <ArrowLeftIcon style={{ width: "1.75rem" }} />
-    ) : (
-      <ArrowRightIcon style={{ width: "1.75rem" }} />
-    );
+      direction === 'left' ? (
+          <ArrowLeftIcon className='text-dark' style={{ width: '1.75rem', color: 'black' }} />
+      ) : (
+          <ArrowRightIcon className='text-dark' style={{ width: '1.75rem' }} />
+      );
 
   return isDisabled ? (
     <div className={className}>{icon}</div>

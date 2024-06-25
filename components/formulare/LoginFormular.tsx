@@ -41,11 +41,19 @@ export default function LoginForm() {
                 Math.floor(Date.now() / 1000).toString(),
             );
             localStorage.setItem('user', username);
-            router.push('/buecher');
+            setTimeout(() => {
+                        router.push("/buecher");
+                        router.refresh();
+                    }, 1000);
         } catch (err) {
-            setError((err as Error).message);
+            setTimeout(() => {
+                setError((err as Error).message);
+            }, 1000);
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
+            
         }
     };
 

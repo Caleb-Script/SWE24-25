@@ -1,19 +1,47 @@
-'use server';
+import BuecherTabelle from './table';
+import { CreateBuecherButton } from '../../components/buecher/Buttons';
+import { Suspense } from 'react';
+import SeitenNummerierung from '@/components/Pagination';
+import { fetchBuecherTabelleSeiten } from '@/api/tabellen';
+import Suchleiste from '../../components/Suchleiste';
+import { BuchTabelleSkelet } from '../../components/Skeletons';
+import { BuchFilterButton } from '../../components/BuchFilterButton';
 
-import { fetchBuecherTabelle } from '@/api/tabellen';
-import { Suchkriterien } from '@/lib/suchkriterien';
-import BuchListeClient from '../../components/buecher/BuchListe';
-
-export default async function BuecherTabelle({
-    titel,
-    page,
-    filter,
+export default async function Buecher({
+    searchParams,
 }: {
-    titel: string;
-    page: number;
-    filter: Suchkriterien[];
+    searchParams?: {
+        titel?: string;
+        page?: string;
+        filter?: string;
+    };
 }) {
-    const buecher = await fetchBuecherTabelle(titel, page, filter);
+    const titel = searchParams?.titel || '';
+    const currentPage = Number(searchParams?.page) || 1;
+    const filter = JSON.parse(searchParams?.filter || '[]');
+    const anzahlSeiten = await fetchBuecherTabelleSeiten(titel, filter);
 
-    return <BuchListeClient buecher={buecher} />;
+    return (
+        <main>
+            <h1 className="text-danger mt-5">Bücher</h1>
+            <div className="my-4 d-flex align-items-center justify-content-between gap-2">
+                <Suchleiste placeholder="Suche Bücher..." />
+                <BuchFilterButton />
+                <CreateBuecherButton />
+            </div>
+            <Suspense
+                fallback={<BuchTabelleSkelet />}
+                key={titel + currentPage}
+            >
+                <BuecherTabelle
+                    titel={titel}
+                    filter={filter}
+                    page={currentPage}
+                />
+            </Suspense>
+            <div className="d-flex w-100 justify-content-center">
+                <SeitenNummerierung anzahlSeiten={anzahlSeiten} />
+            </div>
+        </main>
+    );
 }

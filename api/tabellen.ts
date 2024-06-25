@@ -19,12 +19,12 @@ if (process.env.BUECHER_PRO_SEITE) {
 }
 
 export async function fetchBuecherTabelleSeiten(
-  query: string = "",
+  titel: string = "",
   filter: Suchkriterien[]
 ) {
   noStore();
 
-  const daten = await fetchBuecherDaten(filter, query);
+  const daten = await fetchBuecherDaten(filter, titel);
 
    if (daten.buecher && daten.buecher.length > 0) {
      const anzahlSeiten = Math.ceil(
@@ -58,6 +58,7 @@ export async function fetchBuecherTabelle(
 }
 
 async function fetchBuecherDaten(filter: Suchkriterien[], titel: string) {
+  console.log('fetchBuecherDaten: %o', filter);
   const extractedCriteria: Partial<Suchkriterien> = filter.reduce(
     (acc, { key, value }) => ({
       ...acc,
@@ -84,6 +85,7 @@ async function fetchBuecherDaten(filter: Suchkriterien[], titel: string) {
       }
     );
 
+    console.log('fetchBuecherDaten: %o', data);
     return data;
   } catch (error) {
    

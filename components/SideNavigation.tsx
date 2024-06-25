@@ -139,11 +139,11 @@ export default function SideNav({
                                 <li>
                                     <Link
                                         className="dropdown-item"
-                                        href={'#'}
+                                        href={'/'}
                                         onClick={async () => {
                                             await refreshToken();
                                             alert('Token wurde erneuert');
-                                            window.location.href = '/';
+                                            //window.location.href = '/';
                                         }}
                                     >
                                         Token Erneuern
