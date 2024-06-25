@@ -4,9 +4,9 @@ import Link from 'next/link';
 import LoginFormular from '../../components/formulare/LoginFormular';
 import FaceFrownIcon from '@heroicons/react/24/outline/FaceFrownIcon';
 import { useState, useEffect } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
     return (
         <div role="alert">
             <p>Etwas ist schief gelaufen:</p>
