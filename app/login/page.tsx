@@ -24,7 +24,7 @@ export default function Home() {
         );
     } else {
         return (
-            <main className="vh-100 d-flex justify-content-center align-items-center">
+            <main className="vh-100 d-flex justify-content-center align-items-center bg-white">
                 <LoginFormular />
             </main>
         );
