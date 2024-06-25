@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import { DELETE_BUCH } from '../mutation/loeschen';
+import { DELETE_BUCH } from '../mutation/delete';
 import { extractErrorMessage } from '../graphqlError';
 
 export async function deleteActionBuch(

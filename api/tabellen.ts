@@ -2,8 +2,8 @@ import { GraphQLClient } from "graphql-request";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { Buch } from "@/lib/klassen";
 import { Suchkriterien } from "../lib/suchkriterien";
-import { BUECHER_TABELLE } from "./query/query";
 import dotenv from "dotenv";
+import { BUECHER_TABELLE } from "./query/buecher";
 
 dotenv.config();
 

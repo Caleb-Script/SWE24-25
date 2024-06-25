@@ -1,9 +1,8 @@
 import { BuchFormular } from "@/lib/formulare";
 import { unstable_noStore as noStore } from "next/cache";
-import { BUCH, BUCH_FORMULAR } from "./query/query";
 import { GraphQLClient } from "graphql-request";
 import { Buch } from "@/lib/klassen";
-import { redirect } from "next/navigation";
+import { BUCH, BUCH_FORMULAR } from "./query/buch";
 
 
 const client = new GraphQLClient(
