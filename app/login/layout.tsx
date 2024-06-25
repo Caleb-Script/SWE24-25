@@ -10,12 +10,7 @@ export const metadata = {
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <RequireAuth>
-            <SideNav>
-                <BootstrapClient />
-                {children}
-            </SideNav>
-        </RequireAuth>
+        <>{children}</>
     );
 };
 
