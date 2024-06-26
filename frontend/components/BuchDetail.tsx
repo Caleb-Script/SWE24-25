@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { useEffect, useState } from 'react';
 import { Buch } from '../lib/klassen';
@@ -14,23 +14,24 @@ export default function BuchDetailClient({
     buch: Buch;
     datum: string;
 }) {
-    const [isAdmin, setIsAdmin] = useState(false);
-
-    useEffect(() => {
+    const [isAdmin, setIsAdmin] = useState(() => {
         const userRole = localStorage.getItem('user');
-        if (userRole === 'admin') {
-            setIsAdmin(true);
-        }
-    }, []);
+        return userRole === 'admin';
+    });
 
-    const schlagwoerterTags = buch.schlagwoerter.map((interests, index) => (
-        <span
-            key={index}
-            className="badge badge-light text-danger rounded-pill border border-danger me-1"
-        >
-            {interests}
-        </span>
-    ));
+    const renderSchlagwoerter = () => {
+        return buch.schlagwoerter.map(
+            (schlagwort, index) =>
+                schlagwort && (
+                    <span
+                        key={index}
+                        className="badge bg-danger rounded-pill me-1"
+                    >
+                        {schlagwort}
+                    </span>
+                ),
+        );
+    };
 
     return (
         <div className="row">
@@ -48,13 +49,6 @@ export default function BuchDetailClient({
                                     icon={faBookOpen}
                                     style={{ fontSize: '200px', color: 'red' }}
                                 />
-                                {/* <Image
-                  src="/me.jpg"
-                  height={250}
-                  width={250}
-                  className="card-img-top rounded"
-                  alt="..."
-                /> */}
                             </div>
                         </div>
                         <div className="mt-3">
@@ -73,7 +67,7 @@ export default function BuchDetailClient({
             <div className="col-lg-8">
                 <div className="card mb-4">
                     <div className="card-body">
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Titel</p>
                             </div>
@@ -84,7 +78,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">ISBN</p>
                             </div>
@@ -93,7 +87,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Art</p>
                             </div>
@@ -102,7 +96,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Preis</p>
                             </div>
@@ -113,7 +107,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Rabatt</p>
                             </div>
@@ -122,7 +116,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Datum</p>
                             </div>
@@ -131,7 +125,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Lieferbar?</p>
                             </div>
@@ -142,7 +136,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Homepage</p>
                             </div>
@@ -153,7 +147,7 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Rating</p>
                             </div>
@@ -167,13 +161,13 @@ export default function BuchDetailClient({
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        <div className="row mb-3">
                             <div className="col-sm-3">
                                 <p className="mb-0">Schlagwörter</p>
                             </div>
                             <div className="col-sm-9">
                                 <div className="d-flex flex-wrap">
-                                    {schlagwoerterTags}
+                                    {renderSchlagwoerter()}
                                 </div>
                             </div>
                         </div>

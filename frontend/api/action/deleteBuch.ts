@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 import { DELETE_BUCH } from '../mutation/delete';
-import { extractErrorMessage } from '../graphqlError';
+import { extractErrorMessage, handleGraphQLError } from '../graphqlError';
 
 export async function deleteActionBuch(
     id: number,
@@ -15,20 +15,9 @@ export async function deleteActionBuch(
         return { message: `Buch: ${id} wurde gelöscht` };
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);
-        if (
-            error.response &&
-            error.response.errors &&
-            error.response.errors.length > 0
-        ) {
-            const errorMessage = await extractErrorMessage(
-                error.response.errors[0],
-            );
-            if (errorMessage == 'Unauthorized') {
-                alert('Dein Token ist abgelaufen');
-            }
-            throw new Error(errorMessage);
-        }
-        console.error(error);
-        throw new Error('Unbekannter Fehler beim Erstellen des Buchs.');
+        await handleGraphQLError(
+            error,
+            'Unbekannter Fehler beim Löschen des Buchs.',
+        );
     }
 }

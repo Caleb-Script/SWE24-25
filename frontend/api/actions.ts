@@ -10,11 +10,6 @@ console.log(backendServerURL);
 const client = new GraphQLClient(backendServerURL);
 
 export async function createBuch(token: string | null, formData: FormData) {
-    console.log('createBuch: GraphQL Client :', client);
-    console.log(
-        'createBuch: GraphQL Client initialized with URL:',
-        process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL,
-    );
     return await createActionBuch(formData, client, token);
 }
 

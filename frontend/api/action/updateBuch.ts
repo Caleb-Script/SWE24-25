@@ -1,5 +1,5 @@
 import { SchlagwortTyp, BuchartTyp } from '../../lib/typen';
-import { extractErrorMessage } from '../graphqlError';
+import { extractErrorMessage, handleGraphQLError } from '../graphqlError';
 import { UPDATE_BUCH } from '../mutation/update';
 import { GraphQLClient } from 'graphql-request';
 
@@ -49,19 +49,9 @@ export async function updateActionBuch(
         };
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);
-        if (
-            error.response &&
-            error.response.errors &&
-            error.response.errors.length > 0
-        ) {
-            const errorMessage = await extractErrorMessage(
-                error.response.errors[0],
-            );
-            throw new Error(errorMessage);
-        }
-        console.error(error);
-        return {
-            message: 'Datenbankfehler: Buch konnte nicht aktualisiert werden.',
-        };
+        await handleGraphQLError(
+            error,
+            'Datenbankfehler: Buch konnte nicht aktualisiert werden.',
+        );
     }
 }

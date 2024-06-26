@@ -2,46 +2,18 @@ import { gql, GraphQLClient } from 'graphql-request';
 import { unstable_noStore as noStore } from 'next/cache';
 import dotenv from 'dotenv';
 import { Token } from '../lib/interfaces';
-import { redirect } from 'next/navigation';
-import { extractErrorMessage } from './graphqlError';
+import { handleGraphQLError } from './graphqlError';
+import { AUTH } from './mutation/login';
+import { REFRESH_TOKEN } from './mutation/refresh';
 
 dotenv.config();
 const client = new GraphQLClient(
     process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL ||
         'https://localhost:3000/graphql',
 );
-console.log(
-    'GraphQL Client initialized with URL:',
-    process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL,
-);
-
-const AUTH = gql`
-    mutation Login($username: String!, $password: String!) {
-        login(username: $username, password: $password) {
-            access_token
-            refresh_token
-            expires_in
-        }
-    }
-`;
-
-const REFRESH_TOKEN = gql`
-    mutation Refresh($refresh_token: String!) {
-        refresh(refresh_token: $refresh_token) {
-            access_token
-            refresh_token
-            expires_in
-        }
-    }
-`;
 
 export async function getAuth(username: string, password: string) {
     noStore();
-    console.log('AUTH: GraphQL Client :', client);
-    console.log(
-        'AUTH: GraphQL Client initialized with URL:',
-        process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL,
-    );
     try {
         const data = await client.request<{ login: Token }>(AUTH, {
             username,
@@ -51,14 +23,10 @@ export async function getAuth(username: string, password: string) {
         return data.login;
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);
-        if (error.response?.errors?.length > 0) {
-            const errorMessage = await extractErrorMessage(
-                error.response.errors[0],
-            );
-            throw new Error(errorMessage);
-        }
-        console.error(error);
-        throw new Error(error.message);
+        await handleGraphQLError(
+            error,
+            'Ein unbekannter Fehler beim Login ist aufgetreten.',
+        );
     }
 }
 
@@ -93,18 +61,10 @@ export async function refreshToken() {
         return data.refresh;
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);
-        if (error.response?.errors?.length > 0) {
-            const errorMessage = await extractErrorMessage(
-                error.response.errors[0],
-            );
-            alert(errorMessage);
-            if (typeof window !== 'undefined') {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-            }
-            redirect('/login');
-        }
-        alert('Unbekannter Fehler beim Aktualisieren des Tokens');
-        throw new Error('Unbekannter Fehler beim Aktualisieren des Tokens');
+        await handleGraphQLError(
+            error,
+            'Unbekannter Fehler beim Aktualisieren des Tokens',
+        );
     }
+    
 }

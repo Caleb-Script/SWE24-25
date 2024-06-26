@@ -1,4 +1,38 @@
 import { GraphQLError } from 'graphql';
+import { redirect } from 'next/navigation.js';
+
+export async function handleGraphQLError(
+    error: any,
+    message?: string,
+): Promise<void> {
+    if (
+        error.response &&
+        error.response.errors &&
+        error.response.errors.length > 0
+    ) {
+        const errorMessage = await extractErrorMessage(
+            error.response.errors[0],
+        );
+        if (errorMessage == 'Unauthorized') {
+            alert('Dein Token ist abgelaufen');
+        }
+
+        if (errorMessage === 'Falscher Token') {
+            alert(errorMessage);
+            if (typeof window !== 'undefined') {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+            }
+            redirect('/login');
+        }
+        throw new Error(errorMessage);
+    }
+    console.error(error);
+    throw new Error(
+        message ? message : 'Ein unbekannter Fehler ist aufgetreten.',
+    );
+}
+
 export async function extractErrorMessage(
     error: GraphQLError,
 ): Promise<string> {

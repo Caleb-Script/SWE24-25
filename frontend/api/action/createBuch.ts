@@ -4,7 +4,7 @@ import { GraphQLClient } from 'graphql-request';
 import { BuchartTyp, SchlagwortTyp } from '../../lib/typen';
 import { CREATE_BUCH } from '../mutation/create';
 import { SchlagwortEnum } from '../../lib/enum';
-import { extractErrorMessage } from '../graphqlError';
+import { extractErrorMessage, handleGraphQLError } from '../graphqlError';
 
 export const createActionBuch = async (
     formData: FormData,
@@ -63,18 +63,9 @@ export const createActionBuch = async (
         return { message: `Buch ${titel} erfolgreich erstellt.` };
     } catch (error: any) {
         console.error('Fehler beim Ausführen der GraphQL-Anfrage:', error);
-        if (
-            error.response &&
-            error.response.errors &&
-            error.response.errors.length > 0
-        ) {
-            const errorMessage = await extractErrorMessage(
-                error.response.errors[0],
-            );
-            alert(errorMessage);
-            throw new Error(errorMessage);
-        }
-        console.error(error);
-        throw new Error('Unbekannter Fehler beim Erstellen des Buchs.');
+        await handleGraphQLError(
+            error,
+            'Unbekannter Fehler beim Erstellen des Buchs.',
+        );
     }
 };

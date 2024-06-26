@@ -37,7 +37,7 @@ export async function BuchTabelleSkelet() {
 export async function TableRowSkelet() {
     return (
         <tr>
-            {/* ID */}
+
             <th style={{ width: '26.5rem' }}>
                 <div
                     className="d-flex align-item-center justify-content-center py-3 w-100"
@@ -52,7 +52,6 @@ export async function TableRowSkelet() {
                 </div>
             </th>
 
-            {/* Name */}
             <th>
                 <div
                     className="d-flex align-item-center justify-content-center py-3 w-100"
@@ -67,7 +66,6 @@ export async function TableRowSkelet() {
                 </div>
             </th>
 
-            {/* Vorname */}
             <th>
                 <div
                     className="d-flex align-item-center justify-content-center py-3 w-100"
@@ -82,7 +80,6 @@ export async function TableRowSkelet() {
                 </div>
             </th>
 
-            {/* Geschlecht */}
             <th>
                 <div
                     className="d-flex align-item-center justify-content-center py-2 w-100"
@@ -97,7 +94,6 @@ export async function TableRowSkelet() {
                 </div>
             </th>
 
-            {/* Kontakt */}
             <th>
                 <div
                     className="d-flex align-item-center justify-content-center gap-1 w-100"
@@ -130,7 +126,6 @@ export async function TableRowSkelet() {
                 </div>
             </th>
 
-            {/* Aktionen */}
             <th>
                 <div
                     className="d-flex align-item-center justify-content-center gap-3  w-100"
