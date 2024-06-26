@@ -2,7 +2,7 @@
 
 import { fetchBuecherTabelle } from '@/api/tabellen';
 import { Suchkriterien } from '@/lib/suchkriterien';
-import BuchListeClient from '../../components/buecher/BuchListe';
+import BuchListeClient from '../../components/buecher/BuchTable';
 
 export default async function BuchListeServer({
     titel,

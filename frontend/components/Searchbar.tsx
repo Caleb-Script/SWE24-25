@@ -37,7 +37,7 @@ export default function Suchleiste({ placeholder }: { placeholder: string }) {
                 }}
                 defaultValue={searchParams.get('titel')?.toString()}
             />
-            <MagnifyingGlassIcon className=" text-dark position-absolute start-0 top-50 translate-middle-y h-75" />
+            <MagnifyingGlassIcon className="text-dark position-absolute start-0 top-50 translate-middle-y h-75" />
         </div>
     );
 }

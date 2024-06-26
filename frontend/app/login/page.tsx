@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import LoginFormular from '../../components/formulare/LoginFormular';
+import LoginFormular from '../../components/forms/LoginFormular';
 import FaceFrownIcon from '@heroicons/react/24/outline/FaceFrownIcon';
 
 export default function Home() {

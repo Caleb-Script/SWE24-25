@@ -1,6 +1,6 @@
 export const generatePagination = (currentPage: number, totalPages: number) => {
     // Wenn insgesamt 3 oder weniger Seiten existieren
-    if (totalPages <= 3) {
+    if (totalPages <= 7) {
         // Zeige alle Seitennummern ohne Ellipsen an
         return Array.from({ length: totalPages }, (_, i) => i + 1);
     }

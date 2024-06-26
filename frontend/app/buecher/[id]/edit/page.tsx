@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '../../../../components/Breadcrumbs';
-import UpdateBuchFormular from '../../../../components/formulare/UpdateFormular';
+import UpdateBuchFormular from '../../../../components/forms/UpdateFormular';
 import { fetchBuchById } from '../../../../api/buch';
 
 export default async function Page({ params }: { params: { id: number } }) {

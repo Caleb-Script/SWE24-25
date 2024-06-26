@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Buch } from '../../lib/klassen.js';
+import { Buch } from '../../lib/klassen';
 import {
     DeleteBuchButton,
     InspectBuchButton,

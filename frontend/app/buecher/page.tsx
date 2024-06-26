@@ -3,7 +3,7 @@ import { CreateBuecherButton } from '../../components/buecher/Buttons';
 import { Suspense } from 'react';
 import SeitenNummerierung from '@/components/Pagination';
 import { fetchBuecherTabelleSeiten } from '@/api/tabellen';
-import Suchleiste from '../../components/Suchleiste';
+import Suchleiste from '../../components/Searchbar';
 import { BuchTabelleSkelet } from '../../components/Skeletons';
 import { BuchFilterButton } from '../../components/BuchFilterButton';
 
