@@ -33,9 +33,15 @@ export default function LoginForm() {
         try {
             const { username, password } = loginDaten;
             const token = await getAuth(username, password);
-            localStorage.setItem('token', token.access_token);
-            localStorage.setItem('refreshToken', token.refresh_token);
-            localStorage.setItem('expires_in', token.expires_in);
+            if (token) {
+                localStorage.setItem('token', token.access_token);
+                localStorage.setItem('refreshToken', token.refresh_token);
+                localStorage.setItem('expires_in', token.expires_in);
+            } else {
+                // Handle the case where token is undefined
+                console.error('Error: Token is undefined.');
+                // Optionally handle this case with an error message or fallback behavior
+            }
             localStorage.setItem(
                 'token_timestamp',
                 Math.floor(Date.now() / 1000).toString(),
