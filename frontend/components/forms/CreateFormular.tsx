@@ -39,7 +39,7 @@ export default function CreateBuchFormular() {
             try {
                 const formData = new FormData(form);
                 const result = await createBuch(token, formData);
-                if (result.message) {
+                if (result && result.message) {
                     setResponse(result.message);
                     setTimeout(() => {
                         router.push('/buecher');
