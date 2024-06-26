@@ -45,7 +45,7 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
                     token,
                     formData,
                 );
-                if (result.message) {
+                if (result && result.message) {
                     setResponse(result.message);
                     setTimeout(() => {
                         router.push(`/buecher/${buch.id}`);

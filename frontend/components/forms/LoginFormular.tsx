@@ -38,9 +38,7 @@ export default function LoginForm() {
                 localStorage.setItem('refreshToken', token.refresh_token);
                 localStorage.setItem('expires_in', token.expires_in);
             } else {
-                // Handle the case where token is undefined
                 console.error('Error: Token is undefined.');
-                // Optionally handle this case with an error message or fallback behavior
             }
             localStorage.setItem(
                 'token_timestamp',
