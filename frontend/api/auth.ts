@@ -66,5 +66,4 @@ export async function refreshToken() {
             'Unbekannter Fehler beim Aktualisieren des Tokens',
         );
     }
-    
 }

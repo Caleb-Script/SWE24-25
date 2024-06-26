@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const REFRESH_TOKEN = gql`
     mutation Refresh($refresh_token: String!) {

@@ -37,7 +37,6 @@ export async function BuchTabelleSkelet() {
 export async function TableRowSkelet() {
     return (
         <tr>
-
             <th style={{ width: '26.5rem' }}>
                 <div
                     className="d-flex align-item-center justify-content-center py-3 w-100"

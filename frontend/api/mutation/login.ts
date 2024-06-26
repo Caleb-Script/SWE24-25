@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const AUTH = gql`
     mutation Login($username: String!, $password: String!) {
