@@ -9,8 +9,7 @@ import { extractErrorMessage } from './graphqlError';
 dotenv.config();
 
 const client = new GraphQLClient(
-    process.env.NEXT_PUBLIC_BACKEND_SERVER_URL ||
-        'https://buch:3000/graphql',
+    process.env.NEXT_PUBLIC_BACKEND_SERVER_URL || 'https://buch:3000/graphql',
 );
 
 let BUECHER_PRO_SEITE: number;

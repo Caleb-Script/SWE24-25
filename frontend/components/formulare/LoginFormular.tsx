@@ -42,9 +42,9 @@ export default function LoginForm() {
             );
             localStorage.setItem('user', username);
             setTimeout(() => {
-                        router.push("/buecher");
-                        router.refresh();
-                    }, 125);
+                router.push('/buecher');
+                router.refresh();
+            }, 125);
         } catch (err) {
             setTimeout(() => {
                 setError((err as Error).message);
@@ -53,7 +53,6 @@ export default function LoginForm() {
             setTimeout(() => {
                 setIsLoading(false);
             }, 125);
-            
         }
     };
 

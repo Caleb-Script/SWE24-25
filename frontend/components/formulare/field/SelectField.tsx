@@ -1,5 +1,5 @@
-import React from "react";
-import { SelectFieldProps } from "../../../lib/interfaces.js";
+import React from 'react';
+import { SelectFieldProps } from '../../../lib/interfaces.js';
 
 export function SelectField({
     name,

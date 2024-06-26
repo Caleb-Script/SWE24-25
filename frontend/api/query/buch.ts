@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
 export const BUCH_FORMULAR = gql`
     query Buch($id: ID!) {

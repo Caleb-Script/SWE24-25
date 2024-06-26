@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 type Props = {
-  message: string;
+    message: string;
 };
 
 export const ErrorBannerComponent: React.FC<Props> = ({ message }) => {
-  return (
-    <div role="alert" className="alert alert-danger">
-      {message}
-    </div>
-  );
+    return (
+        <div role="alert" className="alert alert-danger">
+            {message}
+        </div>
+    );
 };

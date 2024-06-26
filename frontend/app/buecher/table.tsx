@@ -1,19 +1,19 @@
-"use server";
+'use server';
 
-import { fetchBuecherTabelle } from "@/api/tabellen";
-import { Suchkriterien } from "@/lib/suchkriterien";
-import BuchListeClient from "../../components/buecher/BuchListe";
+import { fetchBuecherTabelle } from '@/api/tabellen';
+import { Suchkriterien } from '@/lib/suchkriterien';
+import BuchListeClient from '../../components/buecher/BuchListe';
 
 export default async function BuchListeServer({
-  titel,
-  page,
-  filter,
+    titel,
+    page,
+    filter,
 }: {
-  titel: string;
-  page: number;
-  filter: Suchkriterien[];
+    titel: string;
+    page: number;
+    filter: Suchkriterien[];
 }) {
-  const buecher = await fetchBuecherTabelle(titel, page, filter);
+    const buecher = await fetchBuecherTabelle(titel, page, filter);
 
-  return <BuchListeClient buecher={buecher} />;
+    return <BuchListeClient buecher={buecher} />;
 }

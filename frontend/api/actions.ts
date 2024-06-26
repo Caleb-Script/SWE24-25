@@ -4,7 +4,8 @@ import { createActionBuch } from './action/createBuch';
 import { updateActionBuch } from './action/updateBuch';
 
 const backendServerURL =
-    process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL || 'https://localhost:3000/graphql';
+    process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL ||
+    'https://localhost:3000/graphql';
 console.log(backendServerURL);
 const client = new GraphQLClient(backendServerURL);
 

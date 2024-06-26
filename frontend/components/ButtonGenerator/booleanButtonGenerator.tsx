@@ -62,8 +62,8 @@ export function BooleanButtons({
                                 ? 'lieferbar'
                                 : 'nicht lieferbar'
                             : value
-                            ? `mit ${name}`
-                            : `ohne ${name}`}
+                              ? `mit ${name}`
+                              : `ohne ${name}`}
                     </label>
                 </React.Fragment>
             ))}

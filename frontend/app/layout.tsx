@@ -1,29 +1,29 @@
-import "bootstrap/dist/css/bootstrap.css";
-import "./globals.css";
-import { Inter } from "next/font/google";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import BootstrapClient from "../components/BootstrapClient";
+import 'bootstrap/dist/css/bootstrap.css';
+import './globals.css';
+import { Inter } from 'next/font/google';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import BootstrapClient from '../components/BootstrapClient';
 config.autoAddCss = false;
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: "Bücherverwaltung",
-  description: "Bücherverwaltungssystem",
+    title: 'Bücherverwaltung',
+    description: 'Bücherverwaltungssystem',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className} text-dark`}>
-        <BootstrapClient />
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`${inter.className} text-dark`}>
+                <BootstrapClient />
+                {children}
+            </body>
+        </html>
+    );
 }

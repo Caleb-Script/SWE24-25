@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
-import EnumButtons from "@/components/ButtonGenerator/enumButtonGenerator";
-import { createBuch } from "../../api/actions";
-import { BuchArtEnum, SchlagwortEnum } from "../../lib/enum";
-import { ErrorBannerComponent } from "../ErrorBannerComponent";
-import { useRouter } from "next/navigation.js";
-import { Button } from "../Button";
-import { InputField } from "./field/InputField";
-import { SelectField } from "./field/SelectField";
-import { RatingComponent } from "../RatingComponent";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
+import EnumButtons from '@/components/ButtonGenerator/enumButtonGenerator';
+import { createBuch } from '../../api/actions';
+import { BuchArtEnum, SchlagwortEnum } from '../../lib/enum';
+import { ErrorBannerComponent } from '../ErrorBannerComponent';
+import { useRouter } from 'next/navigation.js';
+import { Button } from '../Button';
+import { InputField } from './field/InputField';
+import { SelectField } from './field/SelectField';
+import { RatingComponent } from '../RatingComponent';
 
 export default function CreateBuchFormular() {
     const token =
-        typeof window !== "undefined" ? localStorage.getItem("token") : null;
-    const currentDate = new Date().toISOString().split("T")[0];
+        typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const currentDate = new Date().toISOString().split('T')[0];
     const [isValid, setValid] = useState(false);
-    const initialState = { errors: {}, message: "" };
+    const initialState = { errors: {}, message: '' };
     const [state, setState] = useState(initialState);
     const [response, setResponse] = useState<string>();
     const [error, setError] = useState<string | undefined>(undefined);
@@ -35,14 +35,14 @@ export default function CreateBuchFormular() {
         if (!form.checkValidity()) {
             event.stopPropagation();
         } else {
-            form.classList.add("was-validated");
+            form.classList.add('was-validated');
             try {
                 const formData = new FormData(form);
                 const result = await createBuch(token, formData);
                 if (result.message) {
                     setResponse(result.message);
                     setTimeout(() => {
-                        router.push("/buecher");
+                        router.push('/buecher');
                         router.refresh();
                     }, 500);
                 }
@@ -53,20 +53,20 @@ export default function CreateBuchFormular() {
     };
 
     const handleInputBlur = (
-        event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+        event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>,
     ) => {
         const input = event.currentTarget;
         if (!input.checkValidity()) {
-            input.classList.add("is-invalid");
-            input.classList.remove("is-valid");
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
         } else {
-            input.classList.remove("is-invalid");
-            input.classList.add("is-valid");
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
         }
     };
 
     useEffect(() => {
-        const form = document.getElementById("buchForm") as HTMLFormElement;
+        const form = document.getElementById('buchForm') as HTMLFormElement;
         const handleFormChange = () => {
             if (form && form.checkValidity()) {
                 setValid(true);
@@ -74,9 +74,9 @@ export default function CreateBuchFormular() {
                 setValid(false);
             }
         };
-        form.addEventListener("change", handleFormChange);
+        form.addEventListener('change', handleFormChange);
         return () => {
-            form.removeEventListener("change", handleFormChange);
+            form.removeEventListener('change', handleFormChange);
         };
     }, []);
 
@@ -170,10 +170,10 @@ export default function CreateBuchFormular() {
                         name="buchart"
                         label="Buchart"
                         options={[
-                            { value: BuchArtEnum.KINDLE, label: "Kindle" },
+                            { value: BuchArtEnum.KINDLE, label: 'Kindle' },
                             {
                                 value: BuchArtEnum.DRUCKAUSGABE,
-                                label: "Druckausgabe",
+                                label: 'Druckausgabe',
                             },
                         ]}
                         required
@@ -203,7 +203,7 @@ export default function CreateBuchFormular() {
                         </legend>
                         <EnumButtons
                             enumTyp={SchlagwortEnum}
-                            name={"schlagwoerter"}
+                            name={'schlagwoerter'}
                             selectedValues={[]}
                         />
                     </fieldset>

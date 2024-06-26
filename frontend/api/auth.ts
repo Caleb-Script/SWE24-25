@@ -7,7 +7,8 @@ import { extractErrorMessage } from './graphqlError';
 
 dotenv.config();
 const client = new GraphQLClient(
-    process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL || 'https://localhost:3000/graphql',
+    process.env.NEXT_PUBLIC_BACKEND_CLIENT_URL ||
+        'https://localhost:3000/graphql',
 );
 console.log(
     'GraphQL Client initialized with URL:',
