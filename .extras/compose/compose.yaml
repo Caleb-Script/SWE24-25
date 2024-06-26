@@ -1,6 +1,6 @@
 
 include:
-  - path: /Users/gentlebookpro/Projekte/SWE/buch-web/Buch-Web/buch/.extras/compose/compose.yml
+  - path: ../../backend/.extras/compose/compose.yml
 
 
 version: '3'

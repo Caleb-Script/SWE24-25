@@ -1,0 +1,6 @@
+{
+  "/buecher/page": "app/buecher/page.js",
+  "/login/page": "app/login/page.js",
+  "/buecher/[id]/edit/page": "app/buecher/[id]/edit/page.js",
+  "/buecher/[id]/page": "app/buecher/[id]/page.js"
+}

@@ -1,9 +1,0 @@
-.nyc_output/*
-.vscode/*
-build/*
-coverage/*
-dist/*
-node-ts/*
-scripts/*
-temp/*
-node_modules/*

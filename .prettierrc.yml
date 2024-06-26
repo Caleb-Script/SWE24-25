@@ -1,7 +1,0 @@
-singleQuote: true
-tabWidth: 2
-trailingComma: all
-overrides:
-  - files: ['*.tsx', '*.ts', '*.mts', '*.js', '*.mjs', '*.cjs']
-    options:
-      tabWidth: 4
