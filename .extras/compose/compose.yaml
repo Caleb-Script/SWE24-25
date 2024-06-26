@@ -8,7 +8,7 @@ services:
   buchweb:
     depends_on:
       - buch
-    image: calebgyamfi/buchweb:2024.04.0
+    image: SWE-SS24/buchweb-2:2024.04.0-distroless
     ports:
       - published: 3002
         target: 3002

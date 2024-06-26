@@ -1,7 +1,7 @@
 # https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
 # Kleines Image mittels "standalone"-Konfiguration von "Next.js"
-# Befehl: docker buildx build --sbom true --no-cache --tag swews23gr2/spa:2023.12.0-distroless .
+# Befehl: docker build -t SWE-SS24/buchweb-2:2024.04.0-distroless .
 
 # ---------------------------------------------------------------------------------------
 # S t a g e   b u i l d e r
@@ -53,11 +53,11 @@ EOF
 # ------------------------------------------------------------------------------
 FROM gcr.io/distroless/nodejs20-debian12:nonroot
 
-LABEL org.opencontainers.image.title="swews23gr2-buch-spa" \
-    org.opencontainers.image.description="SPA für 'buch' mit distroless-Image" \
-    org.opencontainers.image.version="2023.10.0-distroless" \
+LABEL org.opencontainers.image.title="buchweb-2" \
+    org.opencontainers.image.description="webanwendung für den Buch server" \
+    org.opencontainers.image.version="2024.04.0-distroless" \
     org.opencontainers.image.licenses="GPL-3.0-or-later" \
-    org.opencontainers.image.authors="swews23gr2"
+    org.opencontainers.image.authors="SWE-SS24"
 
 WORKDIR /opt/app
 
