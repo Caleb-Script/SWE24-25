@@ -44,15 +44,15 @@ export default function LoginForm() {
             setTimeout(() => {
                         router.push("/buecher");
                         router.refresh();
-                    }, 1000);
+                    }, 125);
         } catch (err) {
             setTimeout(() => {
                 setError((err as Error).message);
-            }, 1000);
+            }, 125);
         } finally {
             setTimeout(() => {
                 setIsLoading(false);
-            }, 1000);
+            }, 125);
             
         }
     };

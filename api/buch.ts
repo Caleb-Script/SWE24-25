@@ -6,7 +6,7 @@ import { BUCH, BUCH_FORMULAR } from "./query/buch";
 
 
 const client = new GraphQLClient(
-  process.env.BACKEND_SERVER_URL || "https://localhost:3000/graphql"
+  process.env.NEXT_PUBLIC_BACKEND_SERVER_URL || "https://localhost:3000/graphql"
 );
 
 export async function fetchBuchByIdFormular2(id: string) {

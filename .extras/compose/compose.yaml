@@ -1,0 +1,24 @@
+
+include:
+  - path: /Users/gentlebookpro/Projekte/SWE/buch-web/Buch-Web/buch/.extras/compose/compose.yml
+
+
+version: '3'
+services:
+  buchweb:
+    depends_on:
+      - buch
+    image: calebgyamfi/buchweb:2024.04.0
+    ports:
+      - published: 3002
+        target: 3002
+    env_file: buchweb.env
+    cap_drop: [ALL]
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G

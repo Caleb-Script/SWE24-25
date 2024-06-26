@@ -44,7 +44,7 @@ export default function CreateBuchFormular() {
                     setTimeout(() => {
                         router.push("/buecher");
                         router.refresh();
-                    }, 2000);
+                    }, 500);
                 }
             } catch (error) {
                 setError((error as Error).message);

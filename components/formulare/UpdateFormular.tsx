@@ -50,7 +50,7 @@ export default function UpdateBuchFormular({ buch }: { buch: BuchFormular }) {
                     setTimeout(() => {
                         router.push(`/buecher/${buch.id}`);
                         router.refresh();
-                    }, 2000);
+                    }, 500);
                 }
             } catch (error) {
                 setError((error as Error).message);
